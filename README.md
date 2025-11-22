@@ -1,6 +1,3 @@
-# **README.md** for Transformer
-
-```markdown
 # Transformer from Scratch (PyTorch)
 
 This is a **small, clean implementation of the original Transformer** in PyTorch, built step-by-step for learning purposes.  
@@ -26,8 +23,6 @@ Transformer/
 
 ````
 
----
-
 ## ⚡ Features
 
 - Original Transformer architecture
@@ -35,8 +30,6 @@ Transformer/
 - Encoder and Decoder layers
 - Toy dataset for sequence copying
 - Easy to extend for real tasks (translation, GPT, etc.)
-
----
 
 ## 🛠 Installation
 
@@ -52,8 +45,6 @@ ml pytorch/2.0.1
 
 No other dependencies are needed for the toy dataset example.
 
----
-
 ## 🎓 How it works
 
 * **dataset.py** → Creates random sequences to teach the Transformer to copy sequences.
@@ -63,8 +54,6 @@ No other dependencies are needed for the toy dataset example.
   * `layers.py` → Encoder/Decoder layers + FeedForward network
   * `transformer.py` → Combines all layers into a full Transformer
 * **train.py** → Trains the Transformer on the toy dataset.
-
----
 
 ## 🚀 Training
 
@@ -81,8 +70,6 @@ SEQ_LENGTH = 10        # length of each sequence
 BATCH_SIZE = 32        # batch size
 ```
 
----
-
 ## 📝 Usage
 
 Once trained, you can save the model:
@@ -94,16 +81,12 @@ save_model(model, "transformer.pt")
 load_model(model, "transformer.pt")
 ```
 
----
-
 ## 📌 Next Steps / Extensions
 
 * Add sinusoidal positional encoding
 * Implement autoregressive decoding for inference
 * Train on a real dataset (e.g., EN→DE translation)
 * Extend to GPT-style model
-
----
 
 ## 📚 References
 
