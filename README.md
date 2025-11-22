@@ -52,6 +52,7 @@ No other dependencies are needed for the toy dataset example.
 
   * `attention.py` → Scaled dot-product and multi-head attention
   * `layers.py` → Encoder/Decoder layers + FeedForward network
+  * `positional_encoding.py` → Sinusoidal positional encoding (added to embed token positions, replaces the previous learned positional embedding)
   * `transformer.py` → Combines all layers into a full Transformer
 * **train.py** → Trains the Transformer on the toy dataset.
 
@@ -65,9 +66,28 @@ This will train the model on the toy dataset.
 Key parameters you can adjust:
 
 ```python
+# -----------------------------
+# Dataset
+# -----------------------------
 VOCAB_SIZE = 100       # number of unique tokens
-SEQ_LENGTH = 10        # length of each sequence
-BATCH_SIZE = 32        # batch size
+SEQ_LENGTH = 10        # length of each input/output sequence
+DATASET_SIZE = 5000    # total number of sequences in the dataset
+BATCH_SIZE = 32        # batch size for training
+
+# -----------------------------
+# Model
+# -----------------------------
+D_MODEL = 512          # embedding size
+NUM_HEADS = 8          # number of attention heads
+D_FF = 2048            # feedforward layer size
+NUM_ENCODER_LAYERS = 6 # number of encoder layers
+NUM_DECODER_LAYERS = 6 # number of decoder layers
+
+# -----------------------------
+# Training
+# -----------------------------
+EPOCHS = 20            # number of training epochs
+LR = 1e-4              # learning rate
 ```
 
 ## 📝 Usage
@@ -93,4 +113,3 @@ load_model(model, "transformer.pt")
 * [Attention is All You Need (Vaswani et al., 2017)](https://arxiv.org/abs/1706.03762)
 * PyTorch documentation: [https://pytorch.org/docs/stable/index.html](https://pytorch.org/docs/stable/index.html)
 
-```

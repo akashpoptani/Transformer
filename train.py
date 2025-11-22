@@ -13,8 +13,18 @@ from dataset import ToyCopyDataset
 VOCAB_SIZE = 100       # number of unique tokens
 SEQ_LENGTH = 10        # length of each sequence
 BATCH_SIZE = 32        # batch size
+DATASET_SIZE = 5000    # number of sequences
+
+#training
 LEARNING_RATE = 1e-4
 EPOCHS        = 20
+
+# Model
+D_MODEL = 512
+NUM_HEADS = 8
+D_FF = 2048
+NUM_ENCODER_LAYERS = 6
+NUM_DECODER_LAYERS = 6
 
 # ============================
 # Dataset and DataLoader
@@ -22,7 +32,7 @@ EPOCHS        = 20
 dataset = ToyCopyDataset(
     vocab_size=VOCAB_SIZE,
     seq_len=SEQ_LENGTH,
-    size=5000                     # can make this a variable if you want
+    size=DATASET_SIZE                     # can make this a variable if you want
 )
 
 loader = DataLoader(
@@ -35,7 +45,14 @@ loader = DataLoader(
 # Create the model
 # (must match vocab size)
 # ============================
-model = Transformer(vocab_size=VOCAB_SIZE)
+model = Transformer(
+    vocab_size=VOCAB_SIZE,
+    d_model=D_MODEL,
+    num_heads=NUM_HEADS,
+    d_ff=D_FF,
+    num_encoder_layers=NUM_ENCODER_LAYERS,
+    num_decoder_layers=NUM_DECODER_LAYERS
+)
 
 optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
 loss_fn = torch.nn.CrossEntropyLoss()

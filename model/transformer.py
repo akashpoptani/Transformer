@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 from .layers import EncoderLayer, DecoderLayer
 from .attention import generate_subsequent_mask
+from .positional_encoding import PositionalEncoding
 
 class Transformer(nn.Module):
     def __init__(self, vocab_size, d_model=512, num_heads=8, d_ff=2048,
@@ -10,7 +11,7 @@ class Transformer(nn.Module):
         super().__init__()
 
         self.embed = nn.Embedding(vocab_size, d_model)
-        self.pos_emb = nn.Embedding(5000, d_model)
+        self.pos_encoder = PositionalEncoding(d_model)
 
         self.encoder_layers = nn.ModuleList([
             EncoderLayer(d_model, num_heads, d_ff) 
@@ -29,8 +30,13 @@ class Transformer(nn.Module):
         B, tgt_len = tgt.shape
 
         # Positional encoding
-        src = self.embed(src) + self.pos_emb(torch.arange(src_len).to(src.device))
-        tgt = self.embed(tgt) + self.pos_emb(torch.arange(tgt_len).to(tgt.device))
+        # Embed tokens
+        src = self.embed(src)
+        tgt = self.embed(tgt)
+
+        # Add sinusoidal positional encoding
+        src = self.pos_encoder(src)
+        tgt = self.pos_encoder(tgt)
 
         # Masks
         tgt_mask = generate_subsequent_mask(tgt_len).to(src.device)
