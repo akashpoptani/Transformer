@@ -10,11 +10,11 @@ from dataset import ToyCopyDataset
 # Configuration variables
 # ============================
 
-VOCAB_SIZE   = 3   # number of unique tokens in dataset + model
-SEQ_LENGTH   = 2    # length of each input/output sequence
-BATCH_SIZE   = 2    # number of samples processed together
+VOCAB_SIZE = 100       # number of unique tokens
+SEQ_LENGTH = 10        # length of each sequence
+BATCH_SIZE = 32        # batch size
 LEARNING_RATE = 1e-4
-EPOCHS        = 2
+EPOCHS        = 20
 
 # ============================
 # Dataset and DataLoader
@@ -22,7 +22,7 @@ EPOCHS        = 2
 dataset = ToyCopyDataset(
     vocab_size=VOCAB_SIZE,
     seq_len=SEQ_LENGTH,
-    size=10                     # can make this a variable if you want
+    size=5000                     # can make this a variable if you want
 )
 
 loader = DataLoader(
